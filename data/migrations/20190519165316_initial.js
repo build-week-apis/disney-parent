@@ -10,7 +10,6 @@ exports.up = function(knex, Promise) {
           .unique();
         parents.string("password", 128).notNullable();
         parents.string("email", 128).notNullable();
-        parents.string("accountType", 128).notNullable();
       })
 
       // VOLUNTEER TABLE
