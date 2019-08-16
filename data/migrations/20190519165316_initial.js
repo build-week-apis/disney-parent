@@ -4,7 +4,10 @@ exports.up = function(knex, Promise) {
       // PARENT TABLE
       .createTable("parents", parents => {
         parents.increments();
-        parents.string("username", 128).notNullable();
+        parents
+          .string("username", 128)
+          .notNullable()
+          .unique();
         parents.string("password", 128).notNullable();
         parents.string("email", 128).notNullable();
         parents.string("accountType", 128).notNullable();
@@ -12,23 +15,22 @@ exports.up = function(knex, Promise) {
 
       // VOLUNTEER TABLE
 
-
       // POSTS TABLE
       .createTable("posts", posts => {
         posts.increments();
         posts
-        .integer("parent_id")
-        .unsigned()
-        .notNullable()
-        .references("id")
-        .inTable("parents")
-        .onDelete("CASCADE")
-        .onUpdate("CASCADE");
+          .integer("parent_id")
+          .unsigned()
+          .notNullable()
+          .references("id")
+          .inTable("parents")
+          .onDelete("CASCADE")
+          .onUpdate("CASCADE");
         posts.string("title", 128).notNullable();
-        posts.string("attraction",128).notNullable();
+        posts.string("attraction", 128).notNullable();
         posts.integer("children").notNullable();
         posts.string("time", 128).notNullable();
-          posts.timestamps(true, true);
+        posts.timestamps(true, true);
         // posts
         //   .integer("post_id")
         //   .unsigned()
