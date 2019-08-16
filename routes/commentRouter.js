@@ -38,13 +38,16 @@ router.put("/:id", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const {username, comment } = req.body;
+  const { username, comment } = req.body;
+
+  // console.log(username, comment);
 
   if (!username || !comment) {
     res.status(400).json({ message: "Enter username and comment" });
   }
   try {
     const comments = await Comment.add(req.body);
+    console.log("comments");
     res.json(comments);
   } catch (err) {
     res.status(500).json({ err: "Error posting comment" });
