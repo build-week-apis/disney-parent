@@ -9,6 +9,8 @@ const Users = require("../models/parent-model");
 router.post("/parents/register", (req, res) => {
   const user = req.body;
 
+  console.log(user);
+
   if (!user.username || !user.password || !user.email) {
     res.status(400).json({
       error: "Please fill out all of the fields"
@@ -37,8 +39,9 @@ router.post("/parents/register", (req, res) => {
           });
       })
       .catch(error => {
+        console.log(error);
         res.status(400).json({
-          error: "This username already exists!"
+          error
         });
       });
   }
