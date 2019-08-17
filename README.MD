@@ -1,2 +1,3 @@
-## Endpoint Documentation
-https://documenter.getpostman.com/view/7322724/S1TN7gy5?version=latest
+# Disney Parent API
+
+### Documentation [here](https://documenter.getpostman.com/view/5798313/SVfGyX5a?version=latest)
