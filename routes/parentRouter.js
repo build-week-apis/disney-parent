@@ -84,6 +84,7 @@ router.put("/:id", restricted, (req, res) => {
     .update(req.body)
     .where({ id })
     .then(users => {
+      console.log("users", users);
       res.json(users);
     })
     .catch(err => {
@@ -92,12 +93,15 @@ router.put("/:id", restricted, (req, res) => {
     });
 });
 //DELETE
-router.delete("/:id", restricted, checkRole("Parent"), async (req, res) => {
+router.delete("/:id", restricted, async (req, res) => {
   try {
-    const parents = await Parents.getById(req.params.id);
+    const parents = await Parents.remove(req.params.id);
     if (parents) {
       const post = await postMessage.get;
+      res.status(200).json(parents);
     }
-  } catch (error) {}
+  } catch (err) {
+    res.send(err);
+  }
 });
 module.exports = router;

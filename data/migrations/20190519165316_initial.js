@@ -12,8 +12,6 @@ exports.up = function(knex, Promise) {
         parents.string("email", 128).notNullable();
       })
 
-      // VOLUNTEER TABLE
-
       // POSTS TABLE
       .createTable("posts", posts => {
         posts.increments();
