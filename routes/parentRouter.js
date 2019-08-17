@@ -80,13 +80,16 @@ router.put("/:id", restricted, (req, res) => {
     req.body.password = hash;
   }
 
-  db("users")
+  db("parents")
     .update(req.body)
     .where({ id })
     .then(users => {
       res.json(users);
     })
-    .catch(err => res.send(err));
+    .catch(err => {
+      console.log(err);
+      res.send(err);
+    });
 });
 //DELETE
 router.delete("/:id", restricted, checkRole("Parent"), async (req, res) => {
