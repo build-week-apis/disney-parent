@@ -35,7 +35,7 @@ function update(id, changes) {
 }
 
 function remove(id) {
-  return db("coments")
+  return db("comments")
     .where("id", id)
     .del();
 }
