@@ -1,9 +1,10 @@
 const express = require("express");
 const Comment = require("../models/comment-model");
 const router = express.Router();
+const protected = require("../auth/restricted");
 
-//GET LIST OF ALL PCOMMENTS
-router.get("/", async (req, res) => {
+//GET LIST OF ALL COMMENTS
+router.get("/", protected, async (req, res) => {
   try {
     const comments = await Comment.getComment();
     res.status(200).json(comments);
@@ -12,7 +13,7 @@ router.get("/", async (req, res) => {
   }
 });
 //GET SPECEFIC ID OF COMMENT
-router.get("/:id", async (req, res) => {
+router.get("/:id", protected, async (req, res) => {
   const comments = await Comment.getById(req.params.id);
   try {
     if (comments) {
@@ -25,7 +26,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 //UPDATE THE ID
-router.put("/:id", async (req, res) => {
+router.put("/:id", protected, async (req, res) => {
   try {
     const updatedComment = await Comment.update(req.params.id, req.body);
     if (updatedComment)
@@ -37,7 +38,7 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", protected, async (req, res) => {
   const { username, comment } = req.body;
 
   // console.log(username, comment);
@@ -55,7 +56,7 @@ router.post("/", async (req, res) => {
 });
 
 //DELETE WITH SPECEFIC ID
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", protected, async (req, res) => {
   try {
     const comment = await Comment.remove(req.params.id);
     if (comment) {
